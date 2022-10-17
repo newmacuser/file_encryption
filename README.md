@@ -16,5 +16,5 @@ Usage:
   
   -h,    display this help and exit
   
-  example: ./testGetopts.sh -i fileA.txt -p password -n 3 -o fileB.txt
+  example: ./encryption_ty.sh -i fileA.txt -p password -n 3 -o fileB.txt
   
