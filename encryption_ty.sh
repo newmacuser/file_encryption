@@ -31,8 +31,8 @@ while getopts "i:p:o:n:dh" arg; do
 	   usage; exit 1;;
     esac
 done
-if [ $number -gt 10 ]; then
-	echo "The round is larger than 10, invalid."; exit 1
+if [ $number -gt 10 ] || [ $number -lt 1 ]; then
+	echo "Invalid: The round is larger than 10 or smaller than 1."; exit 1
 else
  echo "$input"
  echo "$passwd"
