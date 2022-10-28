@@ -38,7 +38,7 @@ while getopts "i:p:n:odh" arg; do
     esac
 done
 if [ $number -gt 10 ] || [ $number -lt 1 ]; then
-	echo "Invalid: The round is larger than 10 or smaller than 1."; exit 1
+	echo "Invalid: The iteration number is larger than 10 or smaller than 1."; exit 1
 else
  if [ -z "$output" ]; then
 	 output="$passwd"-"$number".txt
