@@ -4,24 +4,30 @@ usage(){
 Usage:
   -i,    input file
   -p,    password
-  -n,    rounds of encryption/decryption, not to exceed 10
+  -n,    iterations of encryption/decryption, not to exceed 10
   -o,    output file
   -d,    decryption, default encryption
   -h,    display this help and exit
-  example: ./testGetopts.sh -i fileA.txt -p password -n 3 -o fileB.txt
+  example: ./encryption1.1.sh -i input.txt -p password -n 3 -o output.txt
 "
 }
 decryption="false"; declare -i number=1
-while getopts "i:p:o:n:dh" arg; do
+while getopts "i:p:n:odh" arg; do
     case $arg in
       i)
          input="$OPTARG";;
       p)
          passwd="$OPTARG";;
-      o)
-         output="$OPTARG";;
       n)
          declare -i number="$OPTARG";;
+      o)
+         eval nextopt=\${$OPTIND}
+         if [[ -n $nextopt && $nextopt != -* ]] ; then
+            OPTIND=$((OPTIND + 1))
+            output=$nextopt
+         else
+            output=""
+         fi;;
       d)
          decryption="true";;
       h)
@@ -34,11 +40,20 @@ done
 if [ $number -gt 10 ] || [ $number -lt 1 ]; then
 	echo "Invalid: The round is larger than 10 or smaller than 1."; exit 1
 else
- echo "$input"
- echo "$passwd"
- echo "$number"
- echo "$output"
- echo "$decryption"
+ if [ -z "$output" ]; then
+	 output="$passwd"-"$number".txt
+ 	 echo "$input"
+	 echo "$passwd"
+	 echo "$number"
+	 echo "$output"
+ 	 echo "$decryption"
+ else
+	 echo "$input"
+	 echo "$passwd"
+	 echo "$number"
+	 echo "$output"
+ 	 echo "$decryption"
+ fi
  if [ $decryption == "false" ]
  then
    if [ $number -eq 1 ]; then
