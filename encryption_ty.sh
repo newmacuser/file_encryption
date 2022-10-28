@@ -8,7 +8,7 @@ Usage:
   -o,    output file
   -d,    decryption, default encryption
   -h,    display this help and exit
-  example: ./encryption1.1.sh -i input.txt -p password -n 3 -o output.txt
+  example: ./encryption_ty.sh -i input.txt -p password -n 3 -o output.txt
 "
 }
 decryption="false"; declare -i number=1
