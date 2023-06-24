@@ -9,5 +9,5 @@ This is a shell script used to encrypt or decrypt files on linux.
 -  -o,    output file
 -  -d,    decryption, default encryption
 -  -h,    display this help and exit
--  example: ./encryption_ty.sh -i input.txt -p password -n 3 -o output.txt
+-  example: ./enc7z.sh -i input.txt -p password -n 5 -o output.txt
   
