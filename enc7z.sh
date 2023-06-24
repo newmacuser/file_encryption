@@ -67,7 +67,7 @@ else
        x=1
 	 cat "$input" | openssl enc -aes-256-cbc -md sha384 -a -e -pass pass:"$passwd" -nosalt -out temp_"$x".txt
 	 while [ $x -lt $number ]; do
-		 cat temp_"$x".txt | openssl enc -aes-256-cbc -md sha384 -a -e -pass pass:"$passwd" -nosalt -out temp_"$(( $x + 1 ))".txt
+		 cat temp_"$x".txt | openssl enc -aes-256-cbc -md sha384 -a -e -pass pass:"$passwd""$x" -nosalt -out temp_"$(( $x + 1 ))".txt
 		 x=$(( $x + 1 ))
 	 done
 	 mv temp_"$x".txt "$output"; rm temp_*.txt
@@ -81,14 +81,15 @@ else
        7z x "$input"
        cat "$iname" | openssl enc -aes-256-cbc -md sha384 -a -d -pass pass:"$passwd" -nosalt > "$oname".de."$ext" && rm "$iname"
    else
-       x=1
+       x=1; y=$(( $number - $x ))
      7z x "$input"
-	 cat "$iname" | openssl enc -aes-256-cbc -md sha384 -a -d -pass pass:"$passwd" -nosalt > temp_"$x".txt && rm "$iname"
-	 while [ $x -lt $number ]; do
-		 cat temp_"$x".txt | openssl enc -aes-256-cbc -md sha384 -a -d -pass pass:"$passwd" -nosalt > temp_"$(( $x + 1 ))".txt
+	 cat "$iname" | openssl enc -aes-256-cbc -md sha384 -a -d -pass pass:"$passwd""$y" -nosalt > temp_"$x".txt && rm "$iname"
+	 while [ $x -lt $(( $number - 1 )) ]; do
+	     y=$(( $y - 1 ))
+		 cat temp_"$x".txt | openssl enc -aes-256-cbc -md sha384 -a -d -pass pass:"$passwd""$y" -nosalt > temp_"$(( $x + 1 ))".txt
              x=$(( $x + 1 ))
 	 done
-	 mv temp_"$x".txt "$oname".de."$ext" && rm temp_*.txt
+	 cat temp_"$x".txt | openssl enc -aes-256-cbc -md sha384 -a -d -pass pass:"$passwd" -nosalt > "$oname".de."$ext" && rm temp_*.txt
    fi
  fi
 fi
