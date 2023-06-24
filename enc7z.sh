@@ -5,14 +5,14 @@ This script requires 7zip and openssl.
 Usage:
   -i,    input file
   -p,    password
-  -n,    iterations [int 1-10], default 1
+  -n,    iterations [int 1-10], default 2
   -o,    output file
   -d,    decryption, default encryption
   -h,    display this help and exit
   example: ./encz.sh -i input.txt -p password -n 3 -o output.txt
 "
 }
-decryption="false"; declare -i number=1; passwd="MDAxMA=="
+decryption="false"; declare -i number=2; passwd="MDAxMA=="
 while getopts "i:p:n:odh" arg; do
     case "${arg}" in
       i)
@@ -49,7 +49,7 @@ if [ $number -gt 10 ] || [ $number -lt 1 ]; then
 	echo "Invalid: The iteration number is larger than 10 or smaller than 1."; exit 1
 else
  if [ -z "$output" ]; then
-	 output=$(echo "$passwd"\)"$number""$RANDOM" | base64)
+	 output=$(echo "$passwd"\="$number""$RANDOM" | base64)
 	 echo "Iteration: $number"
 	 echo "Output file: $output"
  	 echo "Decryption: $decryption"
