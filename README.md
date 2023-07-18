@@ -1,6 +1,9 @@
 # file_encryption
 
-This is a shell script used to encrypt or decrypt files on linux.
+This is a shell script used to encrypt or decrypt files on linux and macos.
+
+## Prerequisite
+openssl and 7zip
 
 ## Usage:
 -  -i,    input file
