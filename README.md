@@ -5,6 +5,9 @@ This is a shell script used to encrypt or decrypt files on linux and macos.
 ## Prerequisite
 openSSL (or libreSSL on macos) and 7zip
 
+## Download
+wget 
+
 ## Usage:
 -  -i,    input file
 -  -p,    password
